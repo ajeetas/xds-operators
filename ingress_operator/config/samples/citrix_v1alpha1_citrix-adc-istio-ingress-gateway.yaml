@@ -1,0 +1,69 @@
+apiVersion: citrix.citrix.com/v1alpha1
+kind: Citrix-adc-istio-ingress-gateway
+metadata:
+  name: citrix-adc-istio-ingress-gateway-sample
+spec:
+  # Default values copied from <project_dir>/helm-charts/citrix-adc-istio-ingress-gateway/values.yaml
+  ADMSettings:
+    ADMFingerPrint: null
+    ADMIP: null
+    bandWidth: null
+    bandWidthLicense: false
+    cpxCores: null
+    licenseServerIP: null
+    licenseServerPort: 27000
+    vCPULicense: false
+  certProvider:
+    caAddr: istiod-basic.istio-system.svc
+    caPort: 15012
+    certTTLinHours: 720
+    clusterId: Kubernetes
+    trustDomain: cluster.local
+  citrixCPX: false
+  coe:
+    coeURL: null
+  ingressGateway:
+    EULA: false
+    adcServerName: null
+    exposeMutipleApps: false
+    exposeNonHttpService: false
+    httpNodePort: 30180
+    httpsNodePort: 31443
+    image: quay.io/citrix/citrix-k8s-cpx-ingress:13.0-58.30
+    imagePullPolicy: IfNotPresent
+    label: citrix-ingressgateway
+    lightWeightCPX: 1
+    mgmtHttpPort: 10080
+    mgmtHttpsPort: 10443
+    netProfile: null
+    netscalerUrl: null
+    secretVolumes:
+      mountPath: null
+      name: null
+      secretName: null
+    tcpPort:
+      name: null
+      nodePort: null
+      port: null
+      targetPort: null
+    vserverIP: nsip
+  istioPilot:
+    SAN: null
+    insecureGrpcPort: 15010
+    name: istiod-basic
+    namespace: istio-system
+    secureGrpcPort: 15012
+  metricExporter:
+    image: quay.io/citrix/citrix-adc-metrics-exporter:1.4.6
+    imagePullPolicy: IfNotPresent
+    logLevel: ERROR
+    port: 8888
+    required: true
+    secure: "YES"
+  xDSAdaptor:
+    image: quay.io/citrix/citrix-xds-adaptor:0.9.5
+    imagePullPolicy: IfNotPresent
+    proxyType: router
+    secureConnect: true
+  
+  

@@ -1,0 +1,6 @@
+# Use the 'create api' subcommand to add watches to this file.
+- group: citrix.citrix.com
+  version: v1alpha1
+  kind: Citrix-adc-istio-ingress-gateway
+  chart: helm-charts/citrix-adc-istio-ingress-gateway
+# +kubebuilder:scaffold:watch

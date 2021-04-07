@@ -1,0 +1,73 @@
+# Default values for citrix-adc-istio-ingress-gateway
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+citrixCPX: false 
+
+coe:
+    coeURL:
+
+metricExporter:
+    required: true
+    image: quay.io/citrix/citrix-adc-metrics-exporter:1.4.6
+    port: 8888
+    secure: "YES"
+    logLevel: ERROR
+    imagePullPolicy: IfNotPresent
+
+xDSAdaptor:
+    image: quay.io/citrix/citrix-xds-adaptor:0.9.5
+    imagePullPolicy: IfNotPresent
+    proxyType: router
+    secureConnect: true
+ 
+istioPilot:
+    name: istiod-basic
+    namespace: istio-system
+    secureGrpcPort: 15012
+    insecureGrpcPort: 15010
+    SAN:
+
+certProvider:
+    caAddr: istiod-basic.istio-system.svc
+    caPort: 15012
+    trustDomain: cluster.local
+    certTTLinHours: 720
+    clusterId: Kubernetes
+
+ingressGateway:
+    netscalerUrl: null 
+    image: quay.io/citrix/citrix-k8s-cpx-ingress:13.0-58.30
+    imagePullPolicy: IfNotPresent
+    EULA: NO
+    mgmtHttpPort: 10080
+    mgmtHttpsPort: 10443
+    httpNodePort: 30180
+    httpsNodePort: 31443
+    lightWeightCPX: 1 
+    exposeMutipleApps: false 
+    secretVolumes:
+        name:
+        secretName:
+        mountPath:
+    #licenseServerIP: this value will be taken from ADMSettings.ADMIP
+    label: citrix-ingressgateway
+    exposeNonHttpService: false
+    tcpPort:
+        name:
+        nodePort:
+        port:
+        targetPort:
+    vserverIP: nsip
+    adcServerName:
+    netProfile:
+
+ADMSettings:
+    ADMIP:
+    ADMFingerPrint:
+    licenseServerIP:
+    licenseServerPort: 27000
+    bandWidthLicense: false
+    bandWidth:
+    vCPULicense: false
+    cpxCores:

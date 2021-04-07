@@ -1,0 +1,45 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: '[]'
+    capabilities: Basic Install
+  name: citrix-cpx-istio-sidecar-injector-operator.v0.0.0
+  namespace: placeholder
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions: {}
+  description: In Istio service mesh, a sidecar proxy runs alongside application pods and it intercepts and manages incoming and outgoing traffic for applications. Citrix ADC CPX can be deployed as the sidecar proxy in application pods. A sidecar proxy applies the configured routing policies or rules to the ingress and egress traffic from the pod.
+  displayName: Citrix ADC CPX Istio Sidecar Injector Operator
+  icon:
+  - base64data: ""
+    mediatype: ""
+  install:
+    spec:
+      deployments: null
+    strategy: ""
+  installModes:
+  - supported: false
+    type: OwnNamespace
+  - supported: false
+    type: SingleNamespace
+  - supported: false
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  keywords:
+  - Sidecar
+  - Istio
+  - Citrix
+  - ADC
+  links:
+  - name: Citrix Cpx Istio Sidecar Injector Operator
+    url: https://citrix-cpx-istio-sidecar-injector-operator.domain
+  maintainers:
+  - email: ajeeta.shakeet@citrix.com
+    name: Ajeetashakeet
+  maturity: alpha
+  provider:
+    name: Citrix
+    url: citrix.com
+  version: 0.0.0
