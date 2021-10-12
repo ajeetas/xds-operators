@@ -1,0 +1,24 @@
+# permissions for end users to edit citrix-adc-istio-ingress-gateways.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: citrix-adc-istio-ingress-gateway-editor-role
+rules:
+- apiGroups:
+  - citrix.citrix.com
+  resources:
+  - citrix-adc-istio-ingress-gateways
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - citrix.citrix.com
+  resources:
+  - citrix-adc-istio-ingress-gateways/status
+  verbs:
+  - get
