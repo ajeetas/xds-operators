@@ -1,0 +1,24 @@
+# permissions for end users to edit citrix-cpx-istio-sidecar-injectors.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: citrix-cpx-istio-sidecar-injector-editor-role
+rules:
+- apiGroups:
+  - citrix.citrix.com
+  resources:
+  - citrix-cpx-istio-sidecar-injectors
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - citrix.citrix.com
+  resources:
+  - citrix-cpx-istio-sidecar-injectors/status
+  verbs:
+  - get

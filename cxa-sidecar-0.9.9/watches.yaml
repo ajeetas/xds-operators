@@ -1,0 +1,6 @@
+# Use the 'create api' subcommand to add watches to this file.
+- group: citrix.citrix.com
+  version: v1alpha1
+  kind: Citrix-cpx-istio-sidecar-injector
+  chart: helm-charts/citrix-cpx-istio-sidecar-injector
+#+kubebuilder:scaffold:watch

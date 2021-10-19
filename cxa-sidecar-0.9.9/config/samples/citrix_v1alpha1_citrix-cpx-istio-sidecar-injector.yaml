@@ -1,0 +1,54 @@
+apiVersion: citrix.citrix.com/v1alpha1
+kind: Citrix-cpx-istio-sidecar-injector
+metadata:
+  name: citrix-cpx-istio-sidecar-injector-sample
+spec:
+  # Default values copied from <project_dir>/helm-charts/citrix-cpx-istio-sidecar-injector/values.yaml
+  ADMSettings:
+    ADMIP: null
+    bandWidth: null
+    bandWidthLicense: false
+    licenseServerIP: null
+    licenseServerPort: 27000
+  certProvider:
+    caAddr: istiod.istio-system.svc
+    caPort: 15012
+    certTTLinHours: 720
+    clusterId: Kubernetes
+    jwtPolicy: null
+    trustDomain: cluster.local
+  coe:
+    coeTracing: false
+    coeURL: null
+  cpxProxy:
+    EULA: false
+    cpxDisableProbe: "YES"
+    cpxSidecarMode: true
+    image: quay.io/citrix/citrix-k8s-cpx-ingress:13.0-79.64
+    imagePullPolicy: IfNotPresent
+    mgmtHttpPort: 10080
+    mgmtHttpsPort: 10443
+    netscalerUrl: http://127.0.0.1
+  istioPilot:
+    SAN: null
+    insecureGrpcPort: 15010
+    name: istiod
+    namespace: istio-system
+    secureGrpcPort: 15012
+  sidecarCertsGenerator:
+    image: quay.io/citrix/cpx-sidecar-injector-certgen:1.1.0
+    imagePullPolicy: IfNotPresent
+  sidecarWebHook:
+    imagePullPolicy: IfNotPresent
+    webhookImage: quay.io/citrix/cpx-istio-sidecar-injector:1.0.0
+  webhook:
+    injectionLabelName: cpx-injection
+  xDSAdaptor:
+    image: quay.io/citrix/citrix-xds-adaptor:0.9.9
+    imagePullPolicy: IfNotPresent
+    jsonLog: false
+    logLevel: DEBUG
+    proxyType: sidecar
+    secureConnect: true
+  
+  
