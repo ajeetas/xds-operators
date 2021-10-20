@@ -8,7 +8,7 @@ metadata:
           "apiVersion": "citrix.citrix.com/v1alpha1",
           "kind": "Citrix-cpx-istio-sidecar-injector",
           "metadata": {
-            "name": "citrix-cpx-istio-sidecar-injector-sample"
+            "name": "cpx-sidecar-injector-sample"
           },
           "spec": {
             "ADMSettings": {
@@ -28,7 +28,7 @@ metadata:
             },
             "coe": {
               "coeTracing": false,
-              "coeURL": null
+              "coeURL": ""
             },
             "cpxProxy": {
               "EULA": false,
@@ -72,7 +72,7 @@ metadata:
     capabilities: Basic Install
     categories: "Networking"
     description: In Istio service mesh, a sidecar proxy runs alongside application pods and it intercepts and manages incoming and outgoing traffic for applications. Citrix ADC CPX can be deployed as the sidecar proxy in application pods. A sidecar proxy applies the configured routing policies or rules to the ingress and egress traffic from the pod.
-    containerImage: quay.io/dhirajgedam/cxa-sidecar-operator:0.9.9
+    containerImage: registry.connect.redhat.com/citrix/citrix-cpx-istio-sidecar-injector:0.9.9
     createdAt: 2021-10-18T10:16:17Z
     support: citrix-adc-cpx-istio-sidecar-injector-operator
     repository: https://github.com/citrix/citrix-xds-adaptor
@@ -219,7 +219,7 @@ spec:
           - subjectaccessreviews
           verbs:
           - create
-        serviceAccountName: citrix-cpx-istio-sidecar-injector-operator-controller-manager
+        serviceAccountName: citrix-cpx-istio-sidecar-injector-operator-ctrl-manager
       deployments:
       - name: citrix-cpx-istio-sidecar-injector-operator-ctrl-mgr
         spec:
@@ -251,15 +251,13 @@ spec:
                 - --metrics-bind-address=127.0.0.1:8080
                 - --leader-elect
                 - --leader-election-id=citrix-cpx-istio-sidecar-injector-operator
-                image: quay.io/dhirajgedam/cxa-sidecar-operator:0.9.9
+                image: registry.connect.redhat.com/citrix/citrix-cpx-istio-sidecar-injector:0.9.9
                 livenessProbe:
                   httpGet:
                     path: /healthz
                     port: 8081
                   initialDelaySeconds: 15
                   periodSeconds: 20
-                  successThreshold: 1
-                  failureThreshold: 5
                 name: manager
                 readinessProbe:
                   httpGet:
@@ -269,16 +267,16 @@ spec:
                   periodSeconds: 10
                 resources:
                   limits:
-                    cpu: 200m
-                    memory: 100Mi
+                    cpu: 500m
+                    memory: 500Mi
                   requests:
-                    cpu: 100m
-                    memory: 60Mi
+                    cpu: 200m
+                    memory: 200Mi
                 securityContext:
                   allowPrivilegeEscalation: false
               securityContext:
                 runAsNonRoot: true
-              serviceAccountName: citrix-cpx-istio-sidecar-injector-operator-ctrl-mgr
+              serviceAccountName: citrix-cpx-istio-sidecar-injector-operator-ctrl-manager
               terminationGracePeriodSeconds: 10
       permissions:
       - rules:
@@ -321,7 +319,7 @@ spec:
           verbs:
           - create
           - patch
-        serviceAccountName: citrix-cpx-istio-sidecar-injector-operator-ctrl-mgr
+        serviceAccountName: citrix-cpx-istio-sidecar-injector-operator-ctrl-manager
     strategy: deployment
   installModes:
   - supported: true
